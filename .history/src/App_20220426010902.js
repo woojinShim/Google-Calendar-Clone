@@ -6,18 +6,17 @@ import Sidebar from "./components/Sidebar";
 import Month from "./components/Month";
 
 function App() {
-  const [currentMonth, setCurrentMonth] = useState(getMonth());
-
+  console.table(getMonth(3));
   return (
-    <React.Fragment>
-      <div className="h-screen flex flex-col">
+    <>
+      <div className="h-screen flex flex-columns">
         <CalendarHeader />
         <div className="flex flex-1">
           <Sidebar />
-          <Month month={currentMonth} />
+          <Month />
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 }
 
