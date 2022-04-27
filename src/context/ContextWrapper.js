@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
 
@@ -14,13 +14,27 @@ function savedEventsReducer(state, { type, payload }) {
       throw new Error();
   }
 }
+function initEvents() {
+  const storageEvents = localStorage.getItem("savedEvents");
+  const parsedEvents = storageEvents ? JSON.parse(storageEvents) : [];
+  return parsedEvents;
+}
 
 function ContextWrapper(props) {
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
   const [smallCalendarMonth, setSmallCalendarMonth] = useState(null);
   const [daySelected, setDaySelected] = useState(dayjs);
   const [showEventModal, setShowEventModal] = useState(false);
-  const [savedEvents, dispatchCalEvent] = useReducer(savedEventsReducer, []);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [savedEvents, dispatchCalEvent] = useReducer(
+    savedEventsReducer,
+    [],
+    initEvents
+  );
+
+  useEffect(() => {
+    localStorage.setItem("savedEvents", JSON.stringify(savedEvents));
+  }, [savedEvents]);
 
   useEffect(() => {
     if (smallCalendarMonth !== null) {
@@ -39,6 +53,10 @@ function ContextWrapper(props) {
         setDaySelected,
         showEventModal,
         setShowEventModal,
+        dispatchCalEvent,
+        selectedEvent,
+        setSelectedEvent,
+        savedEvents,
       }}
     >
       {props.children}
