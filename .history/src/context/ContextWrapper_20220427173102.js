@@ -1,3 +1,4 @@
+export default ContextWrapper;
 import React, {
   useState,
   useEffect,
