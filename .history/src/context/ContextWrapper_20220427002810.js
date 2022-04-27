@@ -5,8 +5,7 @@ import dayjs from "dayjs";
 function ContextWrapper(props) {
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
   const [smallCalendarMonth, setSmallCalendarMonth] = useState(null);
-  const [daySelected, setDaySelected] = useState(dayjs);
-  const [showEventModal, setShowEventModal] = useState(false);
+  const [daySelected, setDaySelected] = useState(null);
 
   useEffect(() => {
     if (smallCalendarMonth !== null) {
@@ -23,8 +22,6 @@ function ContextWrapper(props) {
         setSmallCalendarMonth,
         daySelected,
         setDaySelected,
-        showEventModal,
-        setShowEventModal,
       }}
     >
       {props.children}

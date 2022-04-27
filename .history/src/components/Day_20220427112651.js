@@ -20,13 +20,7 @@ export default function Day({ day, rowIdx }) {
           {day.format("DD")}
         </p>
       </header>
-      <div
-        className="flex-1 cursor-pointer"
-        onClick={() => {
-          setDaySelected(day);
-          setShowEventModal(true);
-        }}
-      >
+      <div className="flex-1 cursor-pointer" onClick={() => {}}>
         {""}
       </div>
     </div>
